@@ -9,10 +9,11 @@ import pandas as pd
 #external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv')
 
+
 #app = dash.Dash(__name__)
 def create_multi_app(flask_app):
     multi_app = dash.Dash(server = flask_app, name = "Multiboard", url_base_pathname='/multi/')
-    multi_app.layout = html.Div([
+    multi_app.layout = html.Div([html.Div(children=[
         dcc.Graph(id='graph-with-slider'),
         dcc.Slider(
             id='year-slider',
@@ -21,8 +22,9 @@ def create_multi_app(flask_app):
             value=df['year'].min(),
             marks={str(year): str(year) for year in df['year'].unique()},
             step=None
-        ),
-        html.Div([
+            ),
+        ], style = {'display': 'inline-block', 'width': '60%', 'height': '30%'}),
+        html.Div(children=[
             dcc.Input(
                 id='num-multi',
                 type='number',
@@ -35,7 +37,7 @@ def create_multi_app(flask_app):
                 html.Tr([html.Td([3, html.Sup('x')]), html.Td(id='threes')]),
                 html.Tr([html.Td(['x', html.Sup('x')]), html.Td(id='x^x')]),
             ])
-        ])
+        ], style = {'display': 'inline-block', 'width': '10%', 'height': '20%'})
     ])
     init_callbacks(multi_app)
     init_callbacks2(multi_app)
