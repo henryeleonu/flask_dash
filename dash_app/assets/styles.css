@@ -1,0 +1,12 @@
+
+.divprop {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+}
+
+.tableprop {
+    display: inline-block;
+    height: 150px;
+    width: 200px;
+}
